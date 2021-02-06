@@ -12,13 +12,9 @@ const authorization = require('./middleware/authorization');
 // Routers
 const home = require('./routes/home');
 const assetTypes = require('./routes/assetType');
-const assets = require('./routes/assets');
 const orders = require('./routes/orders');
 const users = require('./routes/users');
-const pallets = require('./routes/pallets');
 const statusCodes = require('./routes/statusCodes');
-const picea = require('./routes/picea');
-const certus = require('./routes/certus');
 
 require('dotenv').config();
 
@@ -40,13 +36,9 @@ app.use(
 // app.use(log);
 app.use('/', home);
 app.use('/api/assetTypes', authorization, assetTypes);
-app.use('/api/assets', authorization, assets);
 app.use('/api/orders', authorization, orders);
-app.use('/api/pallets', authorization, pallets);
 app.use('/api/statuscodes', authorization, statusCodes);
 app.use('/api/users', users);
-app.use('/api/picea', authorization, picea);
-app.use('/api/certus', authorization, certus);
 // app.use(helmet());
 if (app.get('env') == 'development') {
   console.log('morgan enabled');
