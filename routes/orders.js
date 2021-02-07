@@ -18,7 +18,7 @@ router.get('/columnDefinitions', async (req, res) => {
   try {
     const columnDefinitions = await queries.selectAll(
       'Orders_Column_Definition',
-      'id'
+      'order_by_id'
     );
     res.status(200).send({ columnDefinitions: columnDefinitions });
   } catch (err) {
