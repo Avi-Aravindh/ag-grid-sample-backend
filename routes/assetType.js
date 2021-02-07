@@ -44,12 +44,12 @@ router.put('/', async (req, res) => {
 router.delete('/', async (req, res) => {
   console.log('assetype delete', req);
   try {
-    console.log(req.body.data.Asset_Id);
-    // let value = req.body.data.asset_id;
+    console.log(req.body.data.order_id);
+    // let value = req.body.data.order_id;
     const returnCode = await queries.deleteRecord(
       'AssetType',
-      'Asset_Id',
-      req.body.data.Asset_Id
+      'order_id',
+      req.body.data.order_id
     );
     console.log('returncode', returnCode);
     if (returnCode == '200') {

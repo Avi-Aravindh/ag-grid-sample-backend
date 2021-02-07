@@ -92,7 +92,7 @@ router.delete('/multiple', async (req, res) => {
 router.delete('/', async (req, res) => {
   try {
     console.log(req.body.data.order_id);
-    // let value = req.body.data.asset_id;
+    // let value = req.body.data.order_id;
     const returnCode = await queries.deleteRecord(
       'Orders',
       'order_id',

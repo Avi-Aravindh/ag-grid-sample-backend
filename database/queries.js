@@ -70,13 +70,13 @@ function insert(tableName, data) {
   let promise = new Promise((resolve, reject) => {
     knex(tableName)
       .insert(data)
-      .returning('asset_id')
-      .then((asset_ids) => {
-        console.log(asset_ids);
+      .returning('order_id')
+      .then((order_ids) => {
+        console.log(order_ids);
         knex
           .select('*')
           .from(tableName)
-          .whereIn('asset_id', asset_ids)
+          .whereIn('order_id', order_ids)
           .then((rows) => {
             console.log('row', rows);
             resolve(rows);
@@ -247,7 +247,7 @@ function updateMultiple(tableName, data) {
   return knex.transaction((trx) => {
     const queries = data.map((tuple) =>
       knex(tableName)
-        .where('asset_id', tuple.asset_id)
+        .where('order_id', tuple.order_id)
         .update(tuple)
         .transacting(trx)
     );
@@ -264,7 +264,7 @@ function deleteMultiple(tableName, data) {
   console.log('delete multiple query');
   return knex.transaction((trx) => {
     const queries = data.map((tuple) =>
-      knex(tableName).where('asset_id', tuple.asset_id).del().transacting(trx)
+      knex(tableName).where('order_id', tuple.order_id).del().transacting(trx)
     );
     return Promise.all(queries)
       .then(trx.commit)
@@ -280,13 +280,13 @@ function insertSingle(tableName, data, idColumn) {
   let promise = new Promise((resolve, reject) => {
     knex(tableName)
       .insert(data)
-      .returning(idColumn ? idColumn : 'Asset_Id')
+      .returning(idColumn ? idColumn : 'order_id')
       .then((ids) => {
         console.log(ids);
         knex
           .select('*')
           .from(tableName)
-          .whereIn(idColumn ? idColumn : 'Asset_Id', ids)
+          .whereIn(idColumn ? idColumn : 'order_id', ids)
           .then((rows) => {
             console.log('row', rows);
             resolve(rows);
