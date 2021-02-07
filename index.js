@@ -11,7 +11,7 @@ const authorization = require('./middleware/authorization');
 
 // Routers
 const home = require('./routes/home');
-const ItemTypes = require('./routes/ItemType');
+const ItemTypes = require('./routes/itemType');
 const orders = require('./routes/orders');
 const users = require('./routes/users');
 const statusCodes = require('./routes/statusCodes');
