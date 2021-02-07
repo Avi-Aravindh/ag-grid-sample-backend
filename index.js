@@ -11,7 +11,7 @@ const authorization = require('./middleware/authorization');
 
 // Routers
 const home = require('./routes/home');
-const assetTypes = require('./routes/assetType');
+const ItemTypes = require('./routes/ItemType');
 const orders = require('./routes/orders');
 const users = require('./routes/users');
 const statusCodes = require('./routes/statusCodes');
@@ -35,7 +35,7 @@ app.use(
 );
 // app.use(log);
 app.use('/', home);
-app.use('/api/assetTypes', authorization, assetTypes);
+app.use('/api/itemtypes', authorization, ItemTypes);
 app.use('/api/orders', authorization, orders);
 app.use('/api/statuscodes', authorization, statusCodes);
 app.use('/api/users', users);

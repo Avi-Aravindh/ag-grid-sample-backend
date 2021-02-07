@@ -7,29 +7,28 @@ const queries = require('../database/queries');
 
 router.get('/', async (req, res) => {
   try {
-    const assetTypes = await queries.selectAll('AssetType', 'Asset_Name');
-    res.status(200).send({ assetTypes: assetTypes });
+    const ItemTypes = await queries.selectAll('ItemType', 'id');
+    res.status(200).send({ ItemTypes: ItemTypes });
   } catch (err) {
-    res.status('404').send({ message: 'Error finding an asset' });
+    res.status('404').send({ message: 'Error finding ItemTypes' });
   }
 });
 
 router.post('/', async (req, res) => {
   try {
-    const rows = await queries.insertSingle('AssetType', req.body.data);
+    const rows = await queries.insertSingle('ItemType', req.body.data, 'id');
     res.status(200).send({ message: 'insertion success', rows });
   } catch (err) {
     res
       .status('500')
-      .send({ message: `Error inserting asset type - ${err.message}` });
+      .send({ message: `Error inserting Item Types - ${err.message}` });
   }
 });
 
 router.put('/', async (req, res) => {
-  console.log('assettype update', req);
   try {
     const rows = await queries.updateSingle(
-      'AssetType',
+      'ItemType',
       req.body.matchBy,
       req.body.data
     );
@@ -37,19 +36,16 @@ router.put('/', async (req, res) => {
   } catch (err) {
     res
       .status('500')
-      .send({ message: `Error updating asset type - ${err.message}` });
+      .send({ message: `Error updating ItemTypes - ${err.message}` });
   }
 });
 
 router.delete('/', async (req, res) => {
-  console.log('assetype delete', req);
   try {
-    console.log(req.body.data.order_id);
-    // let value = req.body.data.order_id;
     const returnCode = await queries.deleteRecord(
-      'AssetType',
-      'order_id',
-      req.body.data.order_id
+      'ItemType',
+      'id',
+      req.body.data.id
     );
     console.log('returncode', returnCode);
     if (returnCode == '200') {
@@ -59,7 +55,7 @@ router.delete('/', async (req, res) => {
     console.log('catching error', err);
     res
       .status('500')
-      .send({ message: `Error deleting asset type - ${err.message}` });
+      .send({ message: `Error deleting ItemTypes - ${err.message}` });
   }
 });
 
